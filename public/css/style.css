@@ -1,0 +1,59 @@
+html,body, #app {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+#map {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#menuButton {
+    z-index: 1001;
+    position: absolute;
+    right: 28px;
+    top: 28px;
+}
+
+#menu {
+    background-color: #ffffff;
+    z-index: 1000;
+    height: calc(100vh - 20px);
+    top: 10px;
+    padding: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    overflow-y: auto;
+}
+
+@media (max-width: 576px) {
+    #menu {
+        position: absolute;
+        width: calc(100vw - 20px);
+        left: 10px;
+    }
+}
+
+@media (min-width: 577px) {
+    #menu {
+        position: absolute;
+        right: 10px;
+        width: 400px;
+    }
+}
+
+.menuSection {
+    margin-top: 20px;
+}
+
+.menuSection h5 {
+    padding: 0.75rem 1.25rem;
+}
+
+
+.col-50 {
+    width: 50%;
+    display: inline-block;
+}
