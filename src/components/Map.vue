@@ -1,5 +1,5 @@
 <template>
-  <div id="map"></div>
+  <div id="map" :update="list"></div>
 </template>
 
 <script>
@@ -18,12 +18,19 @@ export default {
       map: null,
       tileLayer: null,
       icon: null,
+      markers: []
     }
   },
   mounted() {
     this.initMap()
     this.initIcon()
     this.showPoints()
+  },
+  computed: {
+    list () {
+      this.points = this.$store.state.list
+      this.showPoints()
+    }
   },
   methods: {
     initMap() {
@@ -49,8 +56,23 @@ export default {
 
     showPoints () {
       if (this.points && this.points.length) {
+        this.cleanMarkers()
+
         this.points.forEach(point => {
-          L.marker(point.coords, {icon: this.icon}).addTo(this.map)
+          this.markers.push(
+            L.marker(
+              [point.location.coordinates[1], point.location.coordinates[0]],
+              { icon: this.icon }
+            ).addTo(this.map)
+          )
+        })
+      }
+    },
+
+    cleanMarkers () {
+      if (this.markers && this.markers.length) {
+        this.markers.forEach(marker => {
+          this.map.removeLayer(marker);
         })
       }
     }

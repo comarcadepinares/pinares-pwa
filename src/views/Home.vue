@@ -1,7 +1,7 @@
 <template>
   <div id="fullMap">
     <Map
-      :points="[{coords:[41.9529987,-2.934864]}]"
+      :points="points"
     ></Map>
 
     <button id="menuButton" type="button" class="btn btn-primary" @click="toggleMenu">Menu</button>
@@ -12,10 +12,10 @@
       <div class="menuSection">
         <h5>Category</h5>
         <ul class="list-group list-group-flush">
-          <li :class="getCategoryClass('activities')" @click="filterCategory('activities')">Activities</li>
-          <li :class="getCategoryClass('hotels')" @click="filterCategory('hotels')">Hotels</li>
-          <li :class="getCategoryClass('restaurants')" @click="filterCategory('restaurants')">Restaurants</li>
-          <li :class="getCategoryClass('services')" @click="filterCategory('services')">Services</li>
+          <li :class="getCategoryClass('activities')" @click="setCategory('activities')">Activities</li>
+          <li :class="getCategoryClass('hotels')" @click="setCategory('hotels')">Hotels</li>
+          <li :class="getCategoryClass('restaurants')" @click="setCategory('restaurants')">Restaurants</li>
+          <li :class="getCategoryClass('services')" @click="setCategory('services')">Services</li>
         </ul>
       </div>
       <div class="menuSection">
@@ -40,6 +40,13 @@ export default {
     }
   },
   created () {
+    ws.request('get', '/activity', null, this.token)
+      .then((response) => {
+        this.$store.commit('setActivities', response.activities)
+      })
+      .catch((error) => {
+        console.log('error', error)
+      })
     ws.request('get', '/hotel', null, this.token)
       .then((response) => {
         this.$store.commit('setHotels', response.hotels)
@@ -47,10 +54,24 @@ export default {
       .catch((error) => {
         console.log('error', error)
       })
+    ws.request('get', '/restaurant', null, this.token)
+      .then((response) => {
+        this.$store.commit('setRestaurants', response.restaurants)
+      })
+      .catch((error) => {
+        console.log('error', error)
+      })
+    ws.request('get', '/service', null, this.token)
+      .then((response) => {
+        this.$store.commit('setServices', response.services)
+      })
+      .catch((error) => {
+        console.log('error', error)
+      })
   },
   computed: {
-    hotels () {
-      return this.$store.state.hotels
+    points () {
+      return this.$store.state.list
     }
   },
   methods: {
@@ -64,9 +85,10 @@ export default {
       }
     },
 
-    filterCategory (category) {
+    setCategory (category) {
       if (this.menu.category !== category) {
         this.menu.category = category
+        this.$store.commit('setList', category)
       }
     },
 

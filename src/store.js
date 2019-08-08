@@ -24,9 +24,13 @@ export default new Vuex.Store({
     activities: savedActivities,
     hotels: savedHotels,
     restaurants: savedRestaurants,
-    services: savedServices
+    services: savedServices,
+    list: [],
   },
   mutations: {
+    setList (state, category) {
+      state.list = state[category]
+    },
     setActivities (state, activities) {
       state.activities = activities
       localStorage.setItem('activities', JSON.stringify(state.activities))
