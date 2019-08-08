@@ -1,6 +1,6 @@
 <template>
   <div id="fullMap">
-    <div id="map"></div>
+    <Map></Map>
 
     <button id="menuButton" type="button" class="btn btn-primary" @click="toggleMenu">Menu</button>
     <div id="menu">
@@ -24,23 +24,31 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import L from 'leaflet'
+import Map from '@/components/Map'
 
 export default {
   name: 'fullMap',
   data () {
     return {
-      map: null,
-      tileLayer: null,
       menu: {
         visible: true,
         category: 'activities'
       }
     }
   },
-  mounted() {
-    this.initMap()
+  created () {
+    ws.request('get', '/hotel', null, this.token)
+      .then((response) => {
+        this.$store.commit('setHotels', response.hotels)
+      })
+      .catch((error) => {
+        console.log('error', error)
+      })
+  },
+  computed: {
+    hotels () {
+      return this.$store.state.hotels
+    }
   },
   methods: {
     toggleMenu () {
@@ -51,19 +59,6 @@ export default {
         $("#menu").fadeIn("fast")
         this.menu.visible = true
       }
-    },
-
-    initMap() {
-      this.map = L.map('map').setView([41.9529987,-2.934864], 13)
-
-      this.tileLayer = L.tileLayer(
-        'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
-        {
-          maxZoom: 18,
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
-        }
-      )
-      this.tileLayer.addTo(this.map)
     },
 
     filterCategory (category) {
@@ -80,5 +75,8 @@ export default {
       }
     }
   },
+  components: {
+    Map
+  }
 }
 </script>
