@@ -1,6 +1,8 @@
 <template>
   <div id="fullMap">
-    <Map></Map>
+    <Map
+      :points="[{coords:[41.9529987,-2.934864]}]"
+    ></Map>
 
     <button id="menuButton" type="button" class="btn btn-primary" @click="toggleMenu">Menu</button>
     <div id="menu">
@@ -24,6 +26,7 @@
 </template>
 
 <script>
+import ws from '@/services/webservice'
 import Map from '@/components/Map'
 
 export default {
