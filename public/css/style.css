@@ -53,7 +53,18 @@ html,body, #app {
 }
 
 
-.col-50 {
-    width: 50%;
+.list-row {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    padding-top: 5px;
+}
+
+.list-row .img {
+    width: 45%;
+    display: inline-block;
+}
+
+.list-row .text {
+    margin-left: 2%;
+    width: 53%;
     display: inline-block;
 }

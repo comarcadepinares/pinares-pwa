@@ -10,9 +10,9 @@ let savedServices
 
 try {
   if (localStorage) {
-    savedActivityTypes = JSON.parse(localStorage.getItem('activityTypes')) || []
     savedActivities = JSON.parse(localStorage.getItem('activities')) || []
     savedHotels = JSON.parse(localStorage.getItem('hotels')) || []
+    savedRestaurants = JSON.parse(localStorage.getItem('restaurants')) || []
     savedServices = JSON.parse(localStorage.getItem('services')) || []
   }
 } catch (error) {

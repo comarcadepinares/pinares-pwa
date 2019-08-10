@@ -33,7 +33,6 @@ export default {
   methods: {
     initMap() {
       this.map = L.map('map').setView([41.9529987,-2.934864], 12)
-
       this.tileLayer = L.tileLayer(
         'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
         {
@@ -53,17 +52,17 @@ export default {
     },
 
     showPoints () {
-      if (this.points && this.points.length) {
+      if (this.map && this.points && this.points.length) {
         this.cleanMarkers()
 
-        this.points.forEach(point => {
-          this.markers.push(
-            L.marker(
-              [point.location.coordinates[1], point.location.coordinates[0]],
-              { icon: this.icon }
-            ).addTo(this.map)
+        for (const point of this.points) {
+          const marker = L.marker(
+            [point.location.coordinates[1], point.location.coordinates[0]],
+            { icon: this.icon }
           )
-        })
+          this.markers.push(marker)
+          marker.addTo(this.map)
+        }
       }
     },
 
