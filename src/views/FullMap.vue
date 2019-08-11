@@ -40,7 +40,8 @@ export default {
   data () {
     return {
       visible: true,
-      category: 'activities'
+      category: 'activities',
+      isMobile: false
     }
   },
   created () {
@@ -53,6 +54,7 @@ export default {
   mounted () {
     const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     if (w < 577) {
+      this.isMobile = true
       this.toggleContent()
     }
   },
@@ -105,12 +107,14 @@ export default {
     },
 
     toggleContent (mode = 'fast') {
-      if (this.visible === true) {
-        $("#content").fadeOut(mode)
-        this.visible = false
-      } else {
-        $("#content").fadeIn(mode)
-        this.visible = true
+      if (this.isMobile) {
+        if (this.visible === true) {
+          $("#content").fadeOut(mode)
+          this.visible = false
+        } else {
+          $("#content").fadeIn(mode)
+          this.visible = true
+        }
       }
     },
 
