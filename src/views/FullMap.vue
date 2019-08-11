@@ -21,6 +21,12 @@
         :description="entity.description"
       ></ListRow>
     </div>
+
+    <footer>
+      <button id="toggleContent" type="button" class="btn btn-secondary btn-sm col-12" @click="toggleContent">
+        {{toggleContentText()}}
+      </button>
+    </footer>
   </div>
 </template>
 
@@ -43,6 +49,12 @@ export default {
     }
 
     this.getEntities()
+  },
+  mounted () {
+    const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    if (w < 577) {
+      this.toggleContent()
+    }
   },
   computed: {
     entities () {
@@ -99,6 +111,14 @@ export default {
       } else {
         $("#content").fadeIn(mode)
         this.visible = true
+      }
+    },
+
+    toggleContentText () {
+      if (this.visible === true) {
+        return 'Ver mapa'
+      } else {
+        return 'Ver listado'
       }
     },
 
