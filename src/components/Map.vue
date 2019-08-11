@@ -1,5 +1,5 @@
 <template>
-  <div id="map" :update="update"></div>
+  <div id="map" :update="update" @click="mapClick"></div>
 </template>
 
 <script>
@@ -16,7 +16,10 @@ export default {
       tileLayer: null,
       icon: null,
       points: [],
-      markers: []
+      markers: [],
+
+      clickCount: 0,
+      clickTimer: null
     }
   },
   mounted() {
@@ -71,6 +74,22 @@ export default {
         this.markers.forEach(marker => {
           this.map.removeLayer(marker);
         })
+      }
+    },
+
+    mapClick (event) {
+      event.preventDefault()
+
+      this.clickCount++
+
+      if (this.clickCount === 1) {
+        this.clickTimer = setTimeout(() => {
+          this.clickCount = 0
+          this.$emit('toggleMenu')
+        }, 250)
+      } else if (this.clickCount === 2) {
+        clearTimeout(this.clickTimer)
+        this.clickCount = 0
       }
     }
   }

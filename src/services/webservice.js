@@ -5,7 +5,7 @@ import router from '@/router'
 import store from '@/store'
 
 const config = {
-  baseURL: 'http://localhost:8000',
+  baseURL: 'http://192.168.1.132:8000',
   timeout: 10000,
   headers: {}
 }
