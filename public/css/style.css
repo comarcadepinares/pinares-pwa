@@ -34,10 +34,6 @@ html,body, #app {
     overflow-y: auto;
 }
 
-footer {
-    display: none;
-}
-
 @media (max-width: 576px) {
     #menu {
         position: absolute;
@@ -46,6 +42,7 @@ footer {
     }
 
     #content {
+        display: none;
         position: absolute;
         width: calc(100vw - 20px);
         left: 10px;
@@ -75,6 +72,10 @@ footer {
         left: 10px;
         width: 400px;
         height: calc(100vh - calc(1.5em + 1.5rem + 30px));
+    }
+
+    footer {
+        display: none;
     }
 }
 

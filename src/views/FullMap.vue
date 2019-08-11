@@ -2,7 +2,6 @@
   <div id="fullMap">
     <Map :category="category" @toggleContent="toggleContent"></Map>
 
-    <!-- <button id="menuButton" type="button" class="btn btn-primary" @click="toggleMenu">Menu</button> -->
     <div id="menu">
       <div class="form-group">
         <select class="custom-select" @change="setCategory">
