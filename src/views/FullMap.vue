@@ -1,30 +1,25 @@
 <template>
   <div id="fullMap">
-    <Map :category="category" @toggleMenu="toggleMenu"></Map>
+    <Map :category="category" @toggleContent="toggleContent"></Map>
 
-    <button id="menuButton" type="button" class="btn btn-primary" @click="toggleMenu">Menu</button>
+    <!-- <button id="menuButton" type="button" class="btn btn-primary" @click="toggleMenu">Menu</button> -->
     <div id="menu">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">PINARES</a>
-      </nav>
-      <div class="menuSection">
-        <h5>Category</h5>
-        <div class="form-group">
-          <select class="custom-select" @change="setCategory">
-            <option value="activities" :selected="category == 'activities'">Activities</option>
-            <option value="hotels" :selected="category == 'hotels'">Hotels</option>
-            <option value="restaurants" :selected="category == 'restaurants'">Restaurants</option>
-            <option value="services" :selected="category == 'services'">Services</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <select class="custom-select" @change="setCategory">
+          <option value="activities" :selected="category == 'activities'">Activities</option>
+          <option value="hotels" :selected="category == 'hotels'">Hotels</option>
+          <option value="restaurants" :selected="category == 'restaurants'">Restaurants</option>
+          <option value="services" :selected="category == 'services'">Services</option>
+        </select>
       </div>
-      <div class="menuSection">
-        <ListRow v-for="entity in entities" :key="entity.id"
-          :image="entity.image"
-          :title="entity.name"
-          :description="entity.description"
-        ></ListRow>
-      </div>
+    </div>
+
+    <div id="content">
+      <ListRow v-for="entity in entities" :key="entity.id"
+        :image="entity.image"
+        :title="entity.name"
+        :description="entity.description"
+      ></ListRow>
     </div>
   </div>
 </template>
@@ -97,12 +92,12 @@ export default {
       }
     },
 
-    toggleMenu (mode = 'fast') {
+    toggleContent (mode = 'fast') {
       if (this.visible === true) {
-        $("#menu").fadeOut(mode)
+        $("#content").fadeOut(mode)
         this.visible = false
       } else {
-        $("#menu").fadeIn(mode)
+        $("#content").fadeIn(mode)
         this.visible = true
       }
     },

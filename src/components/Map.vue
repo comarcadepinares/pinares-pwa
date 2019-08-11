@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     initMap() {
-      this.map = L.map('map').setView([41.9529987,-2.934864], 12)
+      this.map = L.map('map', { zoomControl: false }).setView([41.9529987,-2.934864], 12)
       this.tileLayer = L.tileLayer(
         'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
         {
@@ -85,7 +85,7 @@ export default {
       if (this.clickCount === 1) {
         this.clickTimer = setTimeout(() => {
           this.clickCount = 0
-          this.$emit('toggleMenu')
+          this.$emit('toggleContent')
         }, 250)
       } else if (this.clickCount === 2) {
         clearTimeout(this.clickTimer)
