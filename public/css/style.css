@@ -54,17 +54,21 @@ html,body, #app {
 
 
 .list-row {
-    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     padding-top: 5px;
+    height: 100px;
+    overflow-y: hidden;
 }
 
 .list-row .img {
-    width: 45%;
+    width: 49%;
     display: inline-block;
+    vertical-align: middle;
 }
 
 .list-row .text {
     margin-left: 2%;
-    width: 53%;
+    width: 49%;
     display: inline-block;
+    vertical-align: top;
 }
